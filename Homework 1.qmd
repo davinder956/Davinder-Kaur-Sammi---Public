@@ -3,7 +3,9 @@ title: "Exploratory Analysis of the Star Wars Dataset"
 subtitle: "Homework 1"
 author: "Davinder Kaur Sammi"
 date: "`r Sys.Date()`"
-format: pdf
+format: 
+  pdf:
+    dev: cairo_pdf
 execute:
   echo: false
   warning: false
@@ -54,10 +56,9 @@ The scatter plot below shows the relationship between height and mass for each c
 starwars_clean <- starwars |>
   dplyr::filter(!is.na(mass), !is.na(height), mass < 500)
 
-# Create scatter plot - change 1 for homework 2
+# Create scatter plot - change 2 for homework 2
 
 ggplot(starwars_clean, aes(x = height, y = mass, color = gender)) +
-  scale_color_manual(values = c("male" = "#1f77b4", "female" = "#e377c2", "hermaphrodite" = "#2ca02c", "none" = "grey50", "NA" = "black")) +
   geom_point(size = 3, alpha = 0.75) +
   labs(
     title = "Mass vs Height of Star Wars Characters",
@@ -67,7 +68,7 @@ ggplot(starwars_clean, aes(x = height, y = mass, color = gender)) +
   ) +
   theme_minimal(base_size = 12)
 
-# Calculate Pearson correlation
+# Calculate Pearson correlation change 1
 correlation <- cor(starwars_clean$height, starwars_clean$mass, use = "complete.obs")
 correlation
 

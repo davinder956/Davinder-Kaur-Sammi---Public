@@ -67,6 +67,10 @@ ggplot(starwars_clean, aes(x = height, y = mass, color = gender)) +
   ) +
   theme_minimal(base_size = 12)
 
+# Calculate Pearson correlation
+correlation <- cor(starwars_clean$height, starwars_clean$mass, use = "complete.obs")
+correlation
+
 ```
 
 ## Observation
@@ -76,3 +80,5 @@ ggplot(starwars_clean, aes(x = height, y = mass, color = gender)) +
 - Gender differences: male characters dominate the upper ranges of both height and mass, though the sample is small and fictional.
 
 - A few characters appear to be outliers in shape or size (for e.g., small but heavy, or tall and light).
+
+- The correlation coefficient between height and mass is approximately r round(correlation, 2), indicating a moderate-to-strong positive relationship.

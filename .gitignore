@@ -1,0 +1,13 @@
+# R project housekeeping
+.Rhistory
+.Rproj.user/
+
+# Quarto or RMarkdown output files
+*.pdf
+*.html
+*_files/
+*/figure-html/
+
+# System-specific clutter
+.DS_Store
+Thumbs.db

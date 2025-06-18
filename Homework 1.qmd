@@ -83,3 +83,17 @@ correlation
 - A few characters appear to be outliers in shape or size (for e.g., small but heavy, or tall and light).
 
 - The correlation coefficient between height and mass is approximately r round(correlation, 2), indicating a moderate-to-strong positive relationship.
+
+## Visualize with Boxplot
+
+```{r}
+ggplot(starwars_clean, aes(x = gender, y = mass, fill = gender)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(
+    title = "Mass Distribution by Gender",
+    x = "Gender",
+    y = "Mass (kg)"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "none")
+```

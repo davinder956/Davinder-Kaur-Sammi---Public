@@ -1,0 +1,78 @@
+---
+title: "Exploratory Analysis of the Star Wars Dataset"
+subtitle: "Homework 1"
+author: "Davinder Kaur Sammi"
+date: "`r Sys.Date()`"
+format: pdf
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+# Load required libraries
+library(dplyr)
+library(ggplot2)
+
+# Load dataset
+data("starwars", package = "dplyr")
+```
+
+## Introduction
+
+The starwars dataset from the dplyr package contains data on characters from the Star Wars universe. It includes information such as height, mass, species, gender, and home world. This analysis explores the relationship between height and mass, with gender used as a visual grouping variable.
+
+## Descriptive Statistics
+
+Summarizing the distribution of height and mass across characters.
+
+*Height (in cm)*
+
+- Mean: `r round (mean(starwars$height, na.rm = TRUE), 1)`
+
+- Median: `r median (starwars$height, na.rm = TRUE)`
+
+- Range: `r paste (range(starwars$height, na.rm = TRUE), collapse = " - ")`
+
+*Mass (in kg)*
+
+- Mean: `r round (mean(starwars$mass, na.rm = TRUE), 1)`
+
+- Median: `r median (starwars$mass, na.rm = TRUE)`
+
+- Range: `r paste (range(starwars$mass, na.rm = TRUE), collapse = " - ")`
+
+These summary statistics help us understand the scale and variation in body dimensions across characters, and give early hints about potential relationships between variables.
+
+**Plot: Mass vs Height by Gender**
+
+The scatter plot below shows the relationship between height and mass for each character in the dataset. We exclude extreme outliers (e.g., characters with mass above 500 kg like Jabba the Hutt) for interpretability. Points are colored by gender to help identify demographic trends.
+
+```{r}
+# Clean and filter dataset
+starwars_clean <- starwars |>
+  dplyr::filter(!is.na(mass), !is.na(height), mass < 500)
+
+# Create scatter plot - change 1 for homework 2
+
+ggplot(starwars_clean, aes(x = height, y = mass, color = gender)) +
+  scale_color_manual(values = c("male" = "#1f77b4", "female" = "#e377c2", "hermaphrodite" = "#2ca02c", "none" = "grey50", "NA" = "black")) +
+  geom_point(size = 3, alpha = 0.75) +
+  labs(
+    title = "Mass vs Height of Star Wars Characters",
+    x = "Height (cm)",
+    y = "Mass (kg)",
+    color = "Gender"
+  ) +
+  theme_minimal(base_size = 12)
+
+```
+
+## Observation
+
+- A positive trend between height and mass: taller characters generally weigh more.
+
+- Gender differences: male characters dominate the upper ranges of both height and mass, though the sample is small and fictional.
+
+- A few characters appear to be outliers in shape or size (for e.g., small but heavy, or tall and light).
